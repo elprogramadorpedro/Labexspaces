@@ -4,12 +4,13 @@ import {LoginForm} from './styles'
 import { TextField } from '@material-ui/core';
 import { Button } from '@material-ui/core';
 import PageTitle from '../../components/PageTitle'
+
 const LoginPage = () =>{
 
     return(
 
         <div >   
-   <PageTitle title={'Login'}/>
+           <PageTitle title={'Login'}/>
             <LoginForm>
             <TextField label={'Email'} type={'email'}/>
             <TextField label={'Usario'} type={'password'}/>
