@@ -11,7 +11,7 @@ const HomePage = () => {
 
         <div >
    
-      <PageTitle title={'LabeX'}/>
+       <PageTitle title={'LabeX'}/>
        <ButtonsContainer>
        <Link to={'/login'}>
        <Button variant={'outlined'} color={'secundary'}>Area de Administrador</Button>

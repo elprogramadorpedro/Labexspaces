@@ -1,20 +1,21 @@
 import React from "react";
 import styled from "styled-components"
 
-
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Link
-} from "react-router-dom";
+  Route} 
+
+from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import ApplicationPage from "./pages/ApplicationPage";
 import CreateTripPage from "./pages/CreateTripPage";
 import TripDetailPage from "./pages/TripDetailPage";
 import TripsListPage from "./pages/TripsListPage";
 import LoginPage from "./pages/LoginPage";
-
+import { CssBaseline } from "@material-ui/core";
+//import { MuiPickersUtilsProvider } from "@material-ui/pickers";
+//import MomentUtils from '@date-io/date-fns';
 
 const AppContainer = styled.div`
 display:flex;
@@ -23,12 +24,11 @@ align-items:center;
 padding:16px;
 `
 
-
-
 const App = () => {
   return (
     <Router>
-      <div>
+      {/*<MuiPickersUtilsProvider utils={MomentUtils}>*/} {/*Se coloca uma vez so para fechas e horas*/}
+      <CssBaseline>
        
 
         {/* A <Switch> looks through its children <Route>s and
@@ -59,12 +59,14 @@ const App = () => {
 
           <Route path="/">
           <HomePage/>
+          
           </Route>  
   
 
-        </Switch>
-  </AppContainer>      
-      </div>
+              </Switch>
+            </AppContainer>      
+           </CssBaseline>
+          {/*</MuiPickersUtilsProvider>*/}
     </Router>
   );
 }
