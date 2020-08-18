@@ -1,39 +1,90 @@
-import React from 'react'
+import React, { useState } from 'react'
 import PageTitle from '../../components/PageTitle'
-import FormContainer from '../../components/FormContainer'
-import { TextField } from '@material-ui/core';
-import { Button } from '@material-ui/core';
-//import { KeyboardDatePicker } from '@material-ui/pickers';
+import { FormContainer } from '../../components/FormContainer'
+import { TextField, Button } from '@material-ui/core'
+import { KeyboardDatePicker } from '@material-ui/pickers';
+import { useForm } from '../../Hooks/useForm';
+import axios from 'axios'
+import { useHistory } from 'react-router-dom';
+import { useProtectedPage } from '../../Hooks/useProtectedPage';
+
+const CreateTripPage = () => {
+  const [form, onChangeInput] = useForm({
+    name: '',
+    planet: '',
+    description: '',
+    duration: ''
+  })
+
+  useProtectedPage()
 
 
- 
+  const history = useHistory()
 
+  const [date, setDate] = useState(new Date())
 
+  const onSubmitForm = (event) => {
+    event.preventDefault()
+    const formattedDate = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`
 
-const CreateTripPage = () =>{
+    const body = {
+      name: form.name,
+      planet: form.planet,
+      date: formattedDate,
+      description: form.description,
+      durationInDays: form.duration
+    }
 
-    return <div>
-      <PageTitle title={'Criar Viagem'}/>
-            <FormContainer>
-            <TextField label={'Nome'} />
-            <TextField label={'Planeta'} />
+    axios.post('https://us-central1-labenu-apis.cloudfunctions.net/labeX/gabarito/trips', body, {
+      headers: {
+        auth: window.localStorage.getItem('token')
+      }
+    }).then((response) => {
+      history.push('/viagens')
+    })
+  }
+  return <div>
+    <PageTitle title={'Criar viagem'}/>
+    <FormContainer onSubmit={onSubmitForm}>
+      <TextField
+        label={'Nome'} 
+        onChange={onChangeInput}
+        name={'name'}
+        value={form['name']}
+      />
+      <TextField
+        label={'Planeta'}
+        onChange={onChangeInput}
+        name={'planet'}
+        value={form['planet']}
+      />
 
-          {/*
-          <KeyboardDatePicker
+      <KeyboardDatePicker
           disableToolbar
           variant="inline"
           format="dd/MM/yyyy"
           margin="normal"
           label="Data"
-            />*/}
+          value={date}
+          onChange={date => setDate(date)}
+        />
 
-            <TextField label={'Descricao'} />   
-            <TextField label={'Duracao em dias'} type={'number'}/> 
 
-            <Button variant={'contained'} color={'primary'} type={'submit'}>Entrar</Button>
-            </FormContainer>
-            </div>
-    
+      <TextField
+        label={'Descrição'}
+        onChange={onChangeInput}
+        name={'description'}
+        value={form['description']}
+      />
+      <TextField
+        label={'Duração em dias'} type={'number'}
+        onChange={onChangeInput}
+        name={'duration'}
+        value={form['duration']}
+      />
+      <Button variant={'contained'} color={'primary'} type={'submit'}>Criar</Button>
+    </FormContainer>
+  </div>
 }
 
 export default CreateTripPage
