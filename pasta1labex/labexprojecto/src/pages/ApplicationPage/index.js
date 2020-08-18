@@ -1,28 +1,70 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import PageTitle from '../../components/PageTitle'
-import FormContainer from '../../components/FormContainer'
-import { TextField } from '@material-ui/core';
-import { Button } from '@material-ui/core';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
+import { FormContainer } from '../../components/FormContainer'
+import { TextField, Button, InputLabel, Select, FormControl, MenuItem } from '@material-ui/core'
+import axios from 'axios'
+import { useForm } from '../../Hooks/useForm'
+import { useTripsList } from '../../Hooks/useTripsList'
 
+const ApplicationPage = () => {
+  const trips = useTripsList()
+  const [form, onChangeInput] = useForm({
+    name: '',
+    age: 0,
+    applicationText: '',
+    profession: '',
+    country: '',
+    trip: null
+  })
 
-const ApplicationPage = () =>{
+  const onSubmitApplication = (e) => {
+    e.preventDefault()
+    console.log(form)
+    const body = {
+      name: form.name,
+      age: form.age,
+      applicationText: form.applicationText,
+      profession: form.profession,
+      country: form.country
+    }
 
-    return <div >
-       <PageTitle title={'Aplicar Para Viagem'}/>
-            <FormContainer>
-            <TextField label={'Nome do Candidato'} />
-            <TextField label={'Idade'} type={'number'}/>
-            <TextField label={'Texto de Aplicação'} helperText={'explique porque voce e uma boa pessoa candidata'}/>
-            <TextField label={'Profisao'} />   
-            
-        <FormControl>
+    axios.post(`https://us-central1-labenu-apis.cloudfunctions.net/labeX/gabarito/trips/${form.trip.id}/apply`, body)
+  }
+
+  return <div>
+    <PageTitle title={'Aplicar para viagem'} />
+    <FormContainer onSubmit={onSubmitApplication}>
+      <TextField 
+        label={'Nome do candidato'} 
+        onChange={onChangeInput}
+        value={form['name']}
+        name={'name'}
+      />
+      <TextField 
+        label={'Idade'} type={'number'} 
+        onChange={onChangeInput}
+        value={form['age']}
+        name={'age'}
+      />
+      <TextField 
+        label={'Texto de aplicação'} helperText="Explique por que você é uma boa pessoa candidata" 
+        onChange={onChangeInput}
+        value={form['applicationText']}
+        name={'applicationText'}
+      />
+      <TextField 
+        label={'Profissão'} 
+        onChange={onChangeInput}
+        value={form['profession']}
+        name={'profession'}
+      />
+      <FormControl>
         <InputLabel id="select-paises">Países</InputLabel>
         <Select
           labelId="select-paises"
+          onChange={onChangeInput}
+          value={form['country']}
+          name={'country'}
         >
           <MenuItem value={'brasil'}>Brasil</MenuItem>
           <MenuItem value={'argentina'}>Argentina</MenuItem>
@@ -30,22 +72,22 @@ const ApplicationPage = () =>{
         </Select>
       </FormControl>
 
-
       <FormControl>
-        <InputLabel id="select-viagens">Planetas</InputLabel>
+        <InputLabel id="select-viagens">Viagens</InputLabel>
         <Select
-        labelId="select-paises"
+          labelId="select-viagens"
+          onChange={onChangeInput}
+          value={form['trip']}
+          name={'trip'}
         >
-          <MenuItem value={'1'}>Plutao</MenuItem>
-          <MenuItem value={'2'}>Marte</MenuItem>
-          <MenuItem value={'3'}>Urano</MenuItem>
+          {trips.map((trip) => {
+            return <MenuItem value={trip}>{trip.name}</MenuItem>
+          })}
         </Select>
       </FormControl>
-     
-           <Button variant={'contained'} color={'primary'} type={'submit'}>Inscrever-se</Button>
-            </FormContainer>
-        </div>
-   
+      <Button variant={'contained'} color={'primary'} type={'submit'}>Inscrever-se</Button>
+    </FormContainer>
+  </div>
 }
 
 export default ApplicationPage
