@@ -1,23 +1,50 @@
 import React from 'react'
-import Typography from '@material-ui/core/Typography';
-import {LoginForm} from './styles'
-import { TextField } from '@material-ui/core';
-import { Button } from '@material-ui/core';
+import { TextField, Button } from '@material-ui/core'
+import { LoginForm } from './styles'
 import PageTitle from '../../components/PageTitle'
+import { useForm } from '../../Hooks/useForm'
+import axios from 'axios'
+import { useHistory } from 'react-router-dom'
 
-const LoginPage = () =>{
+const LoginPage = () => {
+  const history = useHistory()
+  const [form, onChangeInput] = useForm({
+    email: '',
+    password: ''
+  })
 
-    return(
+  const onSubmitLogin = (event) => {
+    event.preventDefault()
+    const body = {
+      email: form.email,
+      password: form.password
+    }
+    axios.post('https://us-central1-labenu-apis.cloudfunctions.net/labeX/gabarito/login', body).then((response) => {
+      window.localStorage.setItem('token', response.data.token)
+      history.push('/viagens')
+    })
+  }
 
-        <div >   
-           <PageTitle title={'Login'}/>
-            <LoginForm>
-            <TextField label={'Email'} type={'email'}/>
-            <TextField label={'Usario'} type={'password'}/>
-            <Button variant={'contained'} color={'primary'} type={'submit'}>Entrar</Button>
-            </LoginForm>
-        </div>
-    )
+  return <div>
+    <PageTitle title={'Login'}/>
+    <LoginForm onSubmit={onSubmitLogin}>
+      <TextField
+        label={'Email'}
+        type={'email'}
+        onChange={onChangeInput}
+        value={form['email']}
+        name={'email'}
+      />
+      <TextField
+        label={'Senha'}
+        type={'password'}
+        onChange={onChangeInput}
+        value={form['password']}
+        name={'password'}
+      />
+      <Button variant={'contained'} color={'primary'} type={'submit'}>Entrar</Button>
+    </LoginForm>
+  </div>
 }
 
 export default LoginPage

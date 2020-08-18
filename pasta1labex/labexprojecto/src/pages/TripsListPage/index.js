@@ -1,37 +1,31 @@
 import React from 'react'
 import PageTitle from '../../components/PageTitle'
+import { Button, List, ListItem, ListItemText, ListItemLink } from '@material-ui/core'
 import { Link } from 'react-router-dom'
-import {TripsListPageContainer} from './styles'
-import {Button, ListItem, List, ListItemText} from '@material-ui/core';
+import { TripsListPageContainer } from './styles'
+import { useTripsList } from '../../Hooks/useTripsList'
+import { useProtectedPage } from '../../Hooks/useProtectedPage'
 
-const TripsListPage = () =>{
+const TripsListPage = () => {
+  const trips = useTripsList()
+  useProtectedPage()
 
-    return(
+  return <TripsListPageContainer>
+    <PageTitle title={'Lista de Viagens'} />
+    <Link to={'/viagens/criar'}>
+      <Button variant={'contained'} color={'primary'}>Criar viagem</Button>
+    </Link>
 
-        <TripsListPageContainer>
-        <PageTitle title={'Lista de Viagens'}/>
-        <Link to={'/create'}>
-        <Button variant={'contained'} color={'primary'} >Criar viagem</Button>
+    <List component="nav">
+      {trips.map((trip) => {
+        return <Link to={`/viagens/detalhe/${trip.id}`}>
+          <ListItem button>
+            <ListItemText primary={trip.name} />
+          </ListItem>
         </Link>
-
-        <List component="nav" aria-label="secondary mailbox folders">
-        
-        <Link to={'/viagens/detalhe'} >
-        <ListItem button>
-          <ListItemText primary="Viagen para marte" />
-        </ListItem>
-       </Link>
-       
-        <Link to={"viagens/detalhe"} >
-        <ListItem button>
-          <ListItemText primary="Viagen para a Lua" />
-        </ListItem>
-        </Link>
-
-        </List>
-      
-        </TripsListPageContainer>
-    )
+      })}
+    </List>
+  </TripsListPageContainer>
 }
 
 export default TripsListPage
