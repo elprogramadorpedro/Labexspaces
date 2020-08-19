@@ -66,6 +66,6 @@ Para visitantes:
 -senha: 123456
 
 ## Contato
-<Pedro Villalba>
-<elprogramadorpedro@gmail.com>
-<Celular: +55 21 990554342>
+Pedro Villalba
+elprogramadorpedro@gmail.com
+Celular: +55 21 990554342
