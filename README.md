@@ -3,7 +3,7 @@ Labex projeto
 
 ## Stack
 Esse é um projeto de Frontend Web feito utilizando ReactJS, HTML, CSS e uma API integrada; 
-e como gerenciador de pacotes do NodeJS o npm [ou yarn, para quem usou yarn]
+e como gerenciador de pacotes do NodeJS o npm
 Sobre a divisão dos arquivos, há dois grandes setores. Os `components` são 
 os componentes em si do meu projeto (balão de fala, botão de enviar, 
 inputs dos usuários e outros). Já os `Containers` são as páginas em si e 
