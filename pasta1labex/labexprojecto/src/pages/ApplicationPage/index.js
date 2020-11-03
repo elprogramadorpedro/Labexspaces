@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import PageTitle from '../../components/PageTitle'
 import { FormContainer } from '../../components/FormContainer'
+import { AppContainer } from './styles';
 import { TextField, Button, InputLabel, Select, FormControl, MenuItem } from '@material-ui/core'
 import axios from 'axios'
 import { useForm } from '../../Hooks/useForm'
@@ -31,7 +32,7 @@ const ApplicationPage = () => {
     axios.post(`https://us-central1-labenu-apis.cloudfunctions.net/labeX/gabarito/trips/${form.trip.id}/apply`, body)
   }
 
-  return <div>
+  return <AppContainer>
     <PageTitle title={'Aplicar para viagem'} />
     <FormContainer onSubmit={onSubmitApplication}>
       <TextField 
@@ -87,7 +88,7 @@ const ApplicationPage = () => {
       </FormControl>
       <Button variant={'contained'} color={'primary'} type={'submit'}>Inscrever-se</Button>
     </FormContainer>
-  </div>
+  </AppContainer>
 }
 
 export default ApplicationPage
