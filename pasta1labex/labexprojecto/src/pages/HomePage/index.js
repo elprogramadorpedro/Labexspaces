@@ -1,12 +1,12 @@
 import React from 'react'
 import { Button } from '@material-ui/core';
-import { ButtonsContainer } from './styles';
+import { ButtonsContainer, AppContainer } from './styles';
 import { Link } from 'react-router-dom';
 import PageTitle from '../../components/PageTitle';
 
 
 const HomePage = () => {
-  return <div>
+  return <AppContainer>
     <PageTitle title={'LabeX'}/>
     <ButtonsContainer>
       <Link to={'/login'}>
@@ -16,7 +16,7 @@ const HomePage = () => {
         <Button variant={'contained'} color={'primary'}>Quero me candidatar!</Button>
       </Link>
     </ButtonsContainer>
-  </div>
+  </AppContainer>
 }
 
 export default HomePage

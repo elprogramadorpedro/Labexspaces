@@ -1,6 +1,6 @@
 import React from 'react'
 import { TextField, Button } from '@material-ui/core'
-import { LoginForm } from './styles'
+import { LoginForm, AppContainer} from './styles'
 import PageTitle from '../../components/PageTitle'
 import { useForm } from '../../Hooks/useForm'
 import axios from 'axios'
@@ -25,7 +25,7 @@ const LoginPage = () => {
     })
   }
 
-  return <div>
+  return <AppContainer>
     <PageTitle title={'Login'}/>
     <LoginForm onSubmit={onSubmitLogin}>
       <TextField
@@ -44,7 +44,7 @@ const LoginPage = () => {
       />
       <Button variant={'contained'} color={'primary'} type={'submit'}>Entrar</Button>
     </LoginForm>
-  </div>
+  </AppContainer>
 }
 
 export default LoginPage

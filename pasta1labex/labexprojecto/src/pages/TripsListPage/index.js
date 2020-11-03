@@ -1,6 +1,6 @@
 import React from 'react'
 import PageTitle from '../../components/PageTitle'
-import { Button, List, ListItem, ListItemText, ListItemLink } from '@material-ui/core'
+import { Button, List, ListItem, ListItemText} from '@material-ui/core'
 import { Link } from 'react-router-dom'
 import { TripsListPageContainer } from './styles'
 import { useTripsList } from '../../Hooks/useTripsList'

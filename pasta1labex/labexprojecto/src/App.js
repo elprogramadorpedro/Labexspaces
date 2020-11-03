@@ -10,17 +10,21 @@ import CreateTripPage from "./pages/CreateTripPage";
 import TripDetailPage from "./pages/TripDetailPage";
 import TripsListPage from "./pages/TripsListPage";
 import LoginPage from "./pages/LoginPage";
+import ViagensPlanetas from "./pages/ViagensPlanetas"
 import styled from "styled-components";
 import { CssBaseline } from "@material-ui/core";
 import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import DateFnsUtils from '@date-io/date-fns';
+import { Headers} from "./pages/Headers/Headers";
+import Nos from "./pages/Nos";
+import { Experimenta } from "./pages/Experimenta";
+
 
 const AppContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 16px;
+
 `
+
+
 
 const App = () => {
   return (
@@ -28,8 +32,13 @@ const App = () => {
       <MuiPickersUtilsProvider utils={DateFnsUtils}>
 
       <CssBaseline/>
+       <Headers>
+      
+       </Headers>
       <AppContainer>
+     
         <Switch>
+          
           <Route path="/login">
             <LoginPage/>
           </Route>
@@ -45,12 +54,21 @@ const App = () => {
           <Route path="/inscricao">
             <ApplicationPage/>
           </Route>
-          <Route path="/">
+          <Route path="/nosotros">
+            <Nos/>
+          </Route>
+          <Route path="/planetas">
+            <ViagensPlanetas/>
+          </Route>
+          <Route path="/experiencias">
+            <Experimenta/>
+          </Route>
+        <Route path="/">
             <HomePage/>
           </Route>
         </Switch>
       </AppContainer>
-      </MuiPickersUtilsProvider>*
+      </MuiPickersUtilsProvider>
 
     </Router>
   );
