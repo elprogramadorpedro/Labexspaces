@@ -251,7 +251,7 @@ justify-content:space-around;
 export const Divinfo1 = styled.div`
 width:200px;
 height:50px;
-border:1px solid red;
+
 justify-content:center;
 display:flex;
 `
@@ -269,7 +269,7 @@ color: #FFFFFF;
 export const Divinfo2 = styled.div`
 width:200px;
 height:50px;
-border:1px solid red;
+
 `
 
 export const DiviPaSaturno= styled.p`
@@ -286,7 +286,7 @@ color: #FFFFFF;
 export const Divinfo3 = styled.div`
 width:200px;
 height:50px;
-border:1px solid red;
+
 `
 export const DivPaPluton = styled.p`
 
