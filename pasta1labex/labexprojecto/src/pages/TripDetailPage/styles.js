@@ -5,4 +5,4 @@ export const ContentContainer = styled.div`
   grid-auto-flow: column;
   grid-template-columns: 1fr 1fr;
   gap: 32px;
-`
+`;
